@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<script type="text/javascript">
+
+window.onload = function () {
+	age = Number(document.getElementById("xValue").value);
+	
+	var chart = new CanvasJS.Chart("chartContainer", {
+		title:{
+			text: "Recommended Investment Portfolio"              
+		},
+		data: [              
+		{
+			// Change type to "doughnut", "line", "splineArea", etc.
+			type: "doughnut",
+			dataPoints: [
+				{ label: "gold", y: 5  },
+				{ label: "equity",  y: 95-age },
+				{ label: "debt", y: age-5  }
+			]
+		}
+		]
+	});
+
+	function rend(){
+		chart.render();
+	}
+
+	        var renderButton = document.getElementById("renderButton");
+            renderButton.addEventListener("click", rend);
+	
+}
+</script>
+</head>
+<body>
+<center>
+Age:
+<input id="xValue" type="number" step="any" placeholder="Age"> <br><br>
+<button id="renderButton">Calculate</button><br><br>
+<div id="chartContainer" style="height: 500px; width: 70%;"></div>
+</center>
+</body>
+</html>
