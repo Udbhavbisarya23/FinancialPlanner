@@ -5,7 +5,7 @@ const Card = (props) =>{
     return(
         
         <div 
-            className = "tc bg-light-green dib br3 pa3 ma2 grow shadow-5  bw2 "
+            className = "tc dib br3 pa3 ma2 grow shadow-1  bw2 "
             onClick = {change}>
             <img alt = 'Robot' src = {`https://robohash.org/${id}?size=200x200`} />
             <div>

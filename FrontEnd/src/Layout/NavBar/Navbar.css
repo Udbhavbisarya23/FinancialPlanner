@@ -1,0 +1,31 @@
+.navbar{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    background-color: #ffff;
+    height: 10vh;
+    box-shadow: 0 8px 10px -3px #999;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+.spacer {
+    flex: 1;
+}
+/* .navbar_Logo{
+   
+} */
+
+ .navbar_login {
+    padding-right: 1%;
+} 
+
+/* .navbar_team {
+} */
+
+.navbar_list {
+    display: flex;
+    flex-direction: row;
+}
