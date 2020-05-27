@@ -16,7 +16,7 @@ const genLineData = (moreData = {}, moreData2 = {}) => {
     datasets: [
       {
         label: 'Current',
-        backgroundColor: getColor('primary'),
+        backgroundColor: 'blue',
         borderColor: getColor('primary'),
         borderWidth: 1,
         data: [
@@ -64,7 +64,7 @@ const genPieData = () => {
       {
         data: [75, 5, 10, 7, 3],
         backgroundColor: [
-          getColor('primary'),
+          'blue',
           getColor('secondary'),
           getColor('success'),
           getColor('info'),

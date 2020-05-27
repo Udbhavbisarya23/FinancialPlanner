@@ -16,7 +16,7 @@ function App() {
       <Route exact path = "/Login" component = {Login} />
       <Route exact path = "/404" component = {Errorp} />
       <Route exact path = "/Sign-Up" component = {SignUp} /> 
-      <Route exact path = "/Charts" component = {Charts} />     
+      <Route exact path = "/Charts" component = {SideBar} />     
       <Redirect to = "/404" />
       </Switch>  
     </BrowserRouter>

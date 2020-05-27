@@ -38,8 +38,14 @@
     padding-top: 2.25vh;
     padding-bottom: 2.25vh;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-around;
+}
+
+.SignUp_Form{
+    position: relative;
+    left: 25%;
+    width: 50%;
 }
 
 .SignUp_Fields{

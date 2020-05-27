@@ -13,35 +13,41 @@ class App extends Component{
         super();
         this.state = {
             robots: [],
-            searchfield: '',
+            username: '',
+            password: '',
             ans: -1
         };
     }
-    componentDidMount(){
-        fetch('https://jsonplaceholder.typicode.com/users')
-        .then(response => response.json())
-        .then(users => this.setState({robots:users  }));
+    handleSubmit = () => {
+      console.log("hi")
+      fetch('http://localhost:4000/login', {
+        method: 'post',
+        body: JSON.stringify({
+          username: this.state.username,
+          password: this.state.password
+        }),
+        headers: {"Content-Type":"application/json"}
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data)
+      })
+      // fetch('http://localhost:4000')
+      // .then(res => res.json())
+      // .then(console.log)
     }
-    onSearchChange = (event) =>{
-        this.setState({searchfield: event.target.value});
-        
+    handleUserChange = (event) => {
+      this.setState({username: event.target.value})
+      
+    }
+    handlePasswordChange = (event) => {
+      this.setState({password: event.target.value})
     }
     authenticate = () => {
         console.log(1)
     }
     render(){
-        let filteredarr = this.state.robots.filter(user =>{
-            return user.name.toLowerCase().includes(this.state.searchfield.toLowerCase());
-        })
-        if(this.state.robots.length === 0)
-        {
-            return(
-                <div className = "Login_Bg">
-                    <h1 className = "tc Login_Heading">Loading</h1>
-                </div>
-            )
-        }
-        else{
+        
         return(
             <div className = 'tc Login_Bg'>
                 <h1 className = "tc grow Login_Heading" >Login</h1>           
@@ -54,6 +60,8 @@ class App extends Component{
                   className="Login_Fields"
                   id="input-with-icon-textfield"
                   label="Username"
+                  value = {this.state.username}
+                  onChange = {this.handleUserChange}
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
@@ -66,6 +74,8 @@ class App extends Component{
                   className="Login_Fields"
                   id="input-with-icon-textfield"
                   label="Password"
+                  value = {this.state.password}
+                  onChange = {this.handlePasswordChange}
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
@@ -74,6 +84,10 @@ class App extends Component{
                     ),
                   }}
                 />
+                <Button
+                onClick = {this.handleSubmit}>
+                  send
+                </Button>
                 </Card>
                 <Link to = '/Sign-Up'>
                   <div className = "underline bg-animate bg-near-blue inline-flex items-center tc pa2 Redirect_Button">  
@@ -91,7 +105,7 @@ class App extends Component{
             
         );
         }
-    }
+    
     
 }
 export default App;
