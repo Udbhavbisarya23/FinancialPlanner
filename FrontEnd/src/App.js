@@ -8,12 +8,30 @@ import SignUp from './Pages/SignUp/SignUp';
 import SideBar from './Layout/Sidebar'
 import Charts from './Pages/ChartPage'
 
-function App() {
+class App extends React.Component {
+  constructor(){
+    super();
+    this.state = {
+      status: 'NOT_LOGGED_IN',
+      username: ''
+    }
+  }
+  loginCallBack = (username) => {
+    console.log(username + " in main app.js")
+    this.setState({
+      status: 'LOGGED_IN',
+      username: username
+    })
+  }
+  render(){
   return (
     <BrowserRouter className = "App">
     <Switch>
       <Route exact path = "/" component = {Home} />
-      <Route exact path = "/Login" component = {Login} />
+      <Route exact path = "/Login" 
+      render = {props => (
+        <Login {... props} appCallBack = {this.loginCallBack}/>
+      )} />
       <Route exact path = "/404" component = {Errorp} />
       <Route exact path = "/Sign-Up" component = {SignUp} /> 
       <Route exact path = "/Charts" component = {SideBar} />     
@@ -21,6 +39,7 @@ function App() {
       </Switch>  
     </BrowserRouter>
   );
+  }
 }
 
 export default App;

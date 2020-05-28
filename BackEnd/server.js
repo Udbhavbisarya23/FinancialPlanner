@@ -45,12 +45,12 @@ app.post('/login', (req,res) => {
                 res.json(response)
             }
             else{
-                res.status('400').json('Incorrect Username/Password')
+                res.status('400').json('false')
             }
         })
     })
     .catch(err => {
-        res.status('404').json('Incorrect Username/password')
+        res.status('404').json('false')
     })
 })
 
@@ -76,6 +76,8 @@ app.post('/signup', (req,res)=> {
         })
     });
 })
+
+
 // Retrieving financial data for that user
 app.get('/finance',(req,res) => {
     

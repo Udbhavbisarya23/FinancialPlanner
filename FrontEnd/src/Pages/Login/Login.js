@@ -8,9 +8,9 @@ import {CardHeader,CardContent,CardActions,Card,TextField,Button,Grid,InputAdorn
 
 import {AccountCircle} from '@material-ui/icons';
 
-class App extends Component{
-    constructor(){
-        super();
+class Login extends Component{
+    constructor(props){
+        super(props);
         this.state = {
             robots: [],
             username: '',
@@ -30,7 +30,14 @@ class App extends Component{
       })
       .then(response => response.json())
       .then(data => {
+        if(data!= 'false'){
         console.log(data)
+        this.props.appCallBack(data)
+        this.props.history.push("/Charts")
+        }
+        else{
+          alert("Incorrect Username/Password")
+        }
       })
       // fetch('http://localhost:4000')
       // .then(res => res.json())
@@ -108,4 +115,4 @@ class App extends Component{
     
     
 }
-export default App;
+export default Login;
