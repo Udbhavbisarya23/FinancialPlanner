@@ -26,7 +26,7 @@ class SignUp extends React.Component {
     this.state = {
       fname: '',
       lname: '',
-      email: '',
+      ssn: '',
       password: '',
       username: '',
       salary: '',
@@ -43,8 +43,8 @@ class SignUp extends React.Component {
     handleUsernameChange = (event)=>{
       this.setState({username: event.target.value})
     }
-    handleEmailChange= (event)=>{
-      this.setState({email: event.target.value})
+    handleSSNChange= (event)=>{
+      this.setState({ssn: event.target.value})
     }
     handlePasswordChange = (event)=>{
       this.setState({password: event.target.value})
@@ -59,13 +59,14 @@ class SignUp extends React.Component {
       this.setState({age: event.target.value})
     }
     handleSubmit = () => {
-      let {fname,lname,email,password,username,salary,expenses,age} = this.state;
+      let {fname,lname,ssn,password,username,salary,expenses,age} = this.state;
       fetch('http://localhost:4000/signup', {
         method: 'post',
         body: JSON.stringify({
           fname: fname,
+          minit: '',
           lname: lname,
-          email: email,
+          ssn: ssn,
           password: password,
           username: username,
           salary: salary,
@@ -132,6 +133,7 @@ class SignUp extends React.Component {
                 <TextField
                   className="SignUp_Fields"
                   id="input-with-icon-textfield"
+                  type = "password"
                   value = {this.state.password}
                   onChange = {this.handlePasswordChange}
                   label="Password"
@@ -148,9 +150,9 @@ class SignUp extends React.Component {
                 <TextField
                   className="SignUp_Fields"
                   id="input-with-icon-textfield"
-                  label="Email Id"
-                  value = {this.state.email}
-                  onChange = {this.handleEmailChange}
+                  label="SSN"
+                  value = {this.state.ssn}
+                  onChange = {this.handleSSNChange}
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
