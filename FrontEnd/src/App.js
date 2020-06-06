@@ -34,7 +34,8 @@ class App extends React.Component {
       )} />
       <Route exact path = "/404" component = {Errorp} />
       <Route exact path = "/Sign-Up" component = {SignUp} /> 
-      <Route exact path = "/Charts" component = {SideBar} />     
+      <Route exact path = "/Charts" component = {Charts} />   
+      <Route exact path = "/Sidebar" component = {SideBar} />  
       <Redirect to = "/404" />
       </Switch>  
     </BrowserRouter>
