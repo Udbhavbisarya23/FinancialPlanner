@@ -3,6 +3,7 @@ import './Sidebar.css'
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import {List,ListItem,ListItemIcon,ListItemText,Divider} from '@material-ui/core';
 import {Home,Dashboard,Details,AttachMoney} from '@material-ui/icons'
+import {Link} from 'react-router-dom';
 
 const theme = createMuiTheme({
     overrides:{
@@ -68,12 +69,14 @@ class Sidebar extends React.Component {
                 </ListItemIcon>
                 <ListItemText primary = "Dashboard" className = "sidebar_listitem_text"/>
             </ListItem>
+            <Link to = "/Details" className = "sidebar_Link_Button">
             <ListItem className = "sidebar_listitem" button>
                 <ListItemIcon className = "sidebar_listitem_icon">
                     <Details />
                 </ListItemIcon>
                 <ListItemText primary = "Details" className = "sidebar_listitem_text"/>
             </ListItem>
+            </Link>
             </List>
             </nav>              
             </div>

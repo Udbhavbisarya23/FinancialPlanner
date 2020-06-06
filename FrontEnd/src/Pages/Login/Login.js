@@ -33,7 +33,7 @@ class Login extends Component{
         if(data!= 'false'){
         console.log(data)
         this.props.appCallBack(data)
-        this.props.history.push("/Charts")
+        this.props.history.push("/Details")
         }
         else{
           alert("Incorrect Username/Password")

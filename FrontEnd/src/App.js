@@ -7,6 +7,7 @@ import Login from './Pages/Login/Login';
 import SignUp from './Pages/SignUp/SignUp';
 import SideBar from './Layout/Sidebar'
 import Charts from './Pages/ChartPage'
+import Details from './Pages/Details/Details';
 
 class App extends React.Component {
   constructor(){
@@ -32,10 +33,19 @@ class App extends React.Component {
       render = {props => (
         <Login {... props} appCallBack = {this.loginCallBack}/>
       )} />
+      <Route exact path = "/Sign-Up" 
+      render = {props => (
+        <SignUp {... props} appCallBack = {this.loginCallBack}/>
+      )} />
       <Route exact path = "/404" component = {Errorp} />
-      <Route exact path = "/Sign-Up" component = {SignUp} /> 
       <Route exact path = "/Charts" component = {Charts} />   
       <Route exact path = "/Sidebar" component = {SideBar} />  
+
+      <Route exact path = "/Details" 
+      render = {props => (
+        <Details {... props} username = {this.state.username} status = {this.state.status}/>
+      )} />  
+      <Route exact path = "/Dashboard" component = {SideBar} />      
       <Redirect to = "/404" />
       </Switch>  
     </BrowserRouter>

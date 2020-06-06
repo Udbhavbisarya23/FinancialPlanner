@@ -21,8 +21,8 @@ const theme = createMuiTheme({
   }
 })
 class SignUp extends React.Component {
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.state = {
       fname: '',
       lname: '',
@@ -76,7 +76,10 @@ class SignUp extends React.Component {
         headers: {"Content-Type":"application/json"}
       })
       .then(response => response.json())
-      .then(console.log)
+      .then(data => {
+        this.props.appCallBack(this.state.username)
+        this.props.history.push("/Details")
+      })
     }
     render(){  
     return(
