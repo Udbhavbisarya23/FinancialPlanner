@@ -63,12 +63,14 @@ class Sidebar extends React.Component {
                 </ListItemIcon>
                 <ListItemText primary = "Home" className = "sidebar_listitem_text"/>
             </ListItem>
+            <Link to = "/Dashboard" className = "sidebar_Link_Button">
             <ListItem className = "sidebar_listitem" button>
                 <ListItemIcon className = "sidebar_listitem_icon">
                     <Dashboard />
                 </ListItemIcon>
                 <ListItemText primary = "Dashboard" className = "sidebar_listitem_text"/>
             </ListItem>
+            </Link>
             <Link to = "/Details" className = "sidebar_Link_Button">
             <ListItem className = "sidebar_listitem" button>
                 <ListItemIcon className = "sidebar_listitem_icon">

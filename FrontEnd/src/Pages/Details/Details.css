@@ -67,3 +67,8 @@
     left: 35%;
     padding-top: 5vh;
 }
+
+.Dash_Page_Divider{
+    position: relative;
+    top: 3.5vh;
+  }

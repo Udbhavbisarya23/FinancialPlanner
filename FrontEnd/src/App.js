@@ -8,6 +8,7 @@ import SignUp from './Pages/SignUp/SignUp';
 import SideBar from './Layout/Sidebar'
 import Charts from './Pages/ChartPage'
 import Details from './Pages/Details/Details';
+import Dashboard from './Pages/DashBoard/dash1';
 
 class App extends React.Component {
   constructor(){
@@ -44,8 +45,11 @@ class App extends React.Component {
       <Route exact path = "/Details" 
       render = {props => (
         <Details {... props} username = {this.state.username} status = {this.state.status}/>
+      )} />     
+      <Route exact path = "/Dashboard" 
+      render = {props => (
+        <Dashboard {... props} username = {this.state.username} status = {this.state.status}/>
       )} />  
-      <Route exact path = "/Dashboard" component = {SideBar} />      
       <Redirect to = "/404" />
       </Switch>  
     </BrowserRouter>

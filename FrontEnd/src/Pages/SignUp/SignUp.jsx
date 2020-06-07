@@ -60,7 +60,7 @@ class SignUp extends React.Component {
     }
     handleSubmit = () => {
       let {fname,lname,ssn,password,username,salary,expenses,age} = this.state;
-      fetch('http://localhost:4000/signup', {
+      fetch('http://localhost:5000/signup', {
         method: 'post',
         body: JSON.stringify({
           fname: fname,

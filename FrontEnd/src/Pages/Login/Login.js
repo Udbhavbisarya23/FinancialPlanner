@@ -20,7 +20,7 @@ class Login extends Component{
     }
     handleSubmit = () => {
       console.log("hi")
-      fetch('http://localhost:4000/login', {
+      fetch('http://localhost:5000/login', {
         method: 'post',
         body: JSON.stringify({
           username: this.state.username,
@@ -81,6 +81,7 @@ class Login extends Component{
                   className="Login_Fields"
                   id="input-with-icon-textfield"
                   label="Password"
+                  type = "password"
                   value = {this.state.password}
                   onChange = {this.handlePasswordChange}
                   InputProps={{

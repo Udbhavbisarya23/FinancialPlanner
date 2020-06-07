@@ -1,7 +1,7 @@
 import React from 'react';
 import Sidebar from '../../Layout/Sidebar'
 import './Details.css';
-import {Button,Radio,Collapse,List,TextField, ListItem,FormControlLabel} from '@material-ui/core'
+import {Button,Radio,Collapse,List,TextField, ListItem,FormControlLabel,Divider} from '@material-ui/core'
 import {Redirect} from 'react-router-dom';
 
 class Details extends React.Component{
@@ -65,9 +65,82 @@ class Details extends React.Component{
             if(this.state.assetname === '' || this.state.assetvalue === ''){
                 alert("Please enter asset details")
             }
-            // fetch('localhost:4000/assets')
+            else{
+                let variable = "";
+                if(this.state.assetsnew === true){
+                    variable = "true";
+                }
+                else{
+                    variable = "false";
+                }
+                console.log(this.props.username[0].username)
+                fetch('http://localhost:5000/assets', {
+                    method: 'post',
+                    headers: {"Content-Type": "application/json"},
+                    body: JSON.stringify({
+                        username: this.props.username[0].username,
+                        check: variable,
+                        name_asset: this.state.assetname,
+                        value_asset: this.state.assetvalue
+                    })
+                })
+            }
         }
+            if(this.state.debts === true){
+                if(this.state.debtname === '' || this.state.debtvalue === ''){
+                    alert("Please enter Debt details")
+                }
+                else{
+                    let variable = "";
+                    if(this.state.debtsnew === true){
+                        variable = "true";
+                    }
+                    else{
+                        variable = "false";
+                    }
+                    console.log(this.props.username[0].username)
+                    fetch('http://localhost:5000/debts', {
+                        method: 'post',
+                        headers: {"Content-Type": "application/json"},
+                        body: JSON.stringify({
+                            username: this.props.username[0].username,
+                            check: variable,
+                            name_debt: this.state.debtname,
+                            price_debt: this.state.debtvalue
+                        })
+                    })
+
+            }
+        }
+            if(this.state.email === true){
+                if(this.state.newEmail === '' ){
+                    alert("Please enter Email details")
+                }
+                else{
+                    let variable = "";
+                    if(this.state.emailnew === true){
+                        variable = "true";
+                    }
+                    else{
+                        variable = "false";
+                    }
+                    console.log(this.props.username[0].username)
+                    fetch('http://localhost:5000/emails', {
+                        method: 'post',
+                        headers: {"Content-Type": "application/json"},
+                        body: JSON.stringify({
+                            username: this.props.username[0].username,
+                            check: variable,
+                            email_id: this.state.newEmail,
+                            old: this.state.old
+                        })
+                    })
+
+            }
+        }         
+       
     }
+
     handleChange = (event) => {
         const value = event.target.value;
         this.setState({
@@ -76,13 +149,13 @@ class Details extends React.Component{
         })
     }
     render(){
-        if(this.props.status === "NOT_LOGGED_IN"){
-            return(
-                <Redirect to = "/404" />
-            )
-        }
-        else{
-            console.log(this.props.status)
+        // if(this.props.status === "NOT_LOGGED_IN"){
+        //     return(
+        //         <Redirect to = "/404" />
+        //     )
+        // }
+        // else{
+        //     console.log(this.props.status)
         return(
             <div className = "Details_Page">
             <Sidebar />
@@ -90,6 +163,7 @@ class Details extends React.Component{
                 <div className = "Details_Page_Heading">
                     Details Updation
                 </div>
+                {/* <Divider className = "Dash_Page_Divider" /> */}
                 <div className = "Details_Page_Radio_Buttons_Layout">
                 <div className = "Details_Page_Radio_Buttons_Column">
                     <div className = "Details_Page_Radio_Buttons_Column_Heading">
@@ -129,7 +203,7 @@ class Details extends React.Component{
                     <TextField className = "space" id="standard-basic" label="Name of Asset" name = "assetname" value = {this.state.assetname} onChange = {this.handleChange} />
                     </ListItem>
                     <ListItem className = "Details_Page_List_Item">
-                    <TextField className = "space" id="standard-basic" label= "Value of Asset" name = "assetvalue" value = {this.state.assetvalue} />
+                    <TextField className = "space" id="standard-basic" label= "Value of Asset" name = "assetvalue" value = {this.state.assetvalue} onChange = {this.handleChange}/>
                     </ListItem>
                     </List>
                     </Collapse>
@@ -170,10 +244,10 @@ class Details extends React.Component{
                      label="New" />
                      <List component="div" disablePadding className = "Details_Page_List">
                     <ListItem className = "Details_Page_List_Item">
-                    <TextField className = "space" id="standard-basic" label="Name of Debt" name = "debtname" value = {this.state.debtname} />
+                    <TextField className = "space" id="standard-basic" label="Name of Debt" name = "debtname" value = {this.state.debtname} onChange = {this.handleChange}/>
                     </ListItem>
                     <ListItem className = "Details_Page_List_Item">
-                    <TextField className = "space" id="standard-basic" label= "Value of Debt" name = "debtvalue" value = {this.state.debtvalue} />
+                    <TextField className = "space" id="standard-basic" label= "Value of Debt" name = "debtvalue" value = {this.state.debtvalue} onChange = {this.handleChange}/>
                     </ListItem>
                     </List>
                     </Collapse>
@@ -214,10 +288,10 @@ class Details extends React.Component{
                      label="New" />
                      <List component="div" disablePadding className = "Details_Page_List">
                     <ListItem className = "Details_Page_List_Item">
-                    <TextField className = "space" id="standard-basic" label="New Email" name = "newEmail" value = {this.state.newEmail}/>
+                    <TextField className = "space" id="standard-basic" label="New Email" name = "newEmail" value = {this.state.newEmail} onChange = {this.handleChange}/>
                     </ListItem>
                     <ListItem className = "Details_Page_List_Item">
-                    <TextField className = "space" id="standard-basic" label= "Old Email" name = "oldEmail" value = {this.state.oldEmail}/>
+                    <TextField className = "space" id="standard-basic" label= "Old Email" name = "oldEmail" value = {this.state.oldEmail} onChange = {this.handleChange}/>
                     </ListItem>
                     </List>
                     </Collapse>
@@ -235,7 +309,7 @@ class Details extends React.Component{
             </div>
         )
     }
-}
+// }
 }
 
 export default Details;

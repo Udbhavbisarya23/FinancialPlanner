@@ -1,0 +1,35 @@
+.chart-wrapper {
+  padding: 2%;
+  display: inline-block;
+}
+
+.bar.chart-wrapper {
+  width: 70%;
+}
+.small.chart-wrapper {
+  width: 40%;
+}
+
+.line.chart-wrapper {
+  width: 70%;
+}
+
+.Page_Main_Content {
+  position: relative;
+  left: 18.05%;
+  top: 2vh;
+}
+
+.Page_Main_Heading {
+  position: relative;
+  left: 2%;
+  top: 2vh;
+  font-family: sans-serif;
+  color: #333333;
+  font-size: 1.6em;
+}
+
+.Dash_Page_Divider{
+  position: relative;
+  top: 3.5vh;
+}
