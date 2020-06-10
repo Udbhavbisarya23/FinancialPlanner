@@ -56,6 +56,7 @@ class Sidebar extends React.Component {
             </ListItem>
             <Divider />
             <List>
+            <Link to = "/Dashboard" className = "sidebar_Link_Button">
             <ListItem 
             className = "sidebar_listitem" button>
                 <ListItemIcon className = "sidebar_listitem_icon">
@@ -63,7 +64,8 @@ class Sidebar extends React.Component {
                 </ListItemIcon>
                 <ListItemText primary = "Home" className = "sidebar_listitem_text"/>
             </ListItem>
-            <Link to = "/Dashboard" className = "sidebar_Link_Button">
+            </Link>
+            <Link to = "/Dashboard2" className = "sidebar_Link_Button">
             <ListItem className = "sidebar_listitem" button>
                 <ListItemIcon className = "sidebar_listitem_icon">
                     <Dashboard />

@@ -9,6 +9,7 @@ import SideBar from './Layout/Sidebar'
 import Charts from './Pages/ChartPage'
 import Details from './Pages/Details/Details';
 import Dashboard from './Pages/DashBoard/dash1';
+import Dashboard2 from './Pages/DashBoard/dash2';
 
 class App extends React.Component {
   constructor(){
@@ -49,6 +50,10 @@ class App extends React.Component {
       <Route exact path = "/Dashboard" 
       render = {props => (
         <Dashboard {... props} username = {this.state.username} status = {this.state.status}/>
+      )} />  
+      <Route exact path = "/Dashboard2" 
+      render = {props => (
+        <Dashboard2 {... props} username = {this.state.username} status = {this.state.status}/>
       )} />  
       <Redirect to = "/404" />
       </Switch>  

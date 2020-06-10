@@ -10,7 +10,11 @@
   width: 40%;
 }
 
-.line.chart-wrapper {
+.tiny.chart-wrapper {
+  width: 25%;
+}
+
+.big.chart-wrapper {
   width: 70%;
 }
 
@@ -20,16 +24,19 @@
   top: 2vh;
 }
 
-.Page_Main_Heading {
+.Plans_Card_Dashboard{
   position: relative;
-  left: 2%;
-  top: 2vh;
-  font-family: sans-serif;
-  color: #333333;
-  font-size: 1.6em;
+  width: 80%;
+  left: 1%;
 }
 
-.Dash_Page_Divider{
+.plan_card_attributes{
+  display: flex;
+  flex-direction: row;
+  font-family: sans-serif;
+}
+
+.spacer{
   position: relative;
-  top: 3.5vh;
+  left: 5%;
 }

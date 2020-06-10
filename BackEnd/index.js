@@ -198,10 +198,10 @@ app.post("/assets",async (req,res)=>{
 //view assets
 
 app.get("/assets",async (req,res)=>{
-	console.log(JSON.stringify(req.headers.authorization))
+	// console.log(JSON.stringify(req.headers.authorization))
     try{
         const username=req.headers.authorization;
-        const user_ssn=await pool.query("SELECT ssn from users where username=$1",[username])
+        const user_ssn=await pool.query("SELECT ssn from userssn_to_username where username=$1",[username])
         ssn=user_ssn.rows[0].ssn;
         const listAssets= await pool.query("Select name_asset,value_asset from assets  where user_ssn=$1",[ssn]);
         res.json(listAssets.rows);
@@ -234,7 +234,7 @@ app.delete("/assets",async(req,res)=>{
 app.post("/debts",async (req,res)=>{
     try{
         const{username}=req.body;
-        const user_ssn=await pool.query("SELECT ssn from users where username=$1",[username])
+        const user_ssn=await pool.query("SELECT ssn from userssn_to_username where username=$1",[username])
         ssn=user_ssn.rows[0].ssn;
         const{check}=req.body
         const{name_debt}=req.body;
@@ -262,8 +262,8 @@ app.post("/debts",async (req,res)=>{
 
 app.get("/debts",async (req,res)=>{
     try{
-        const{username}=req.body;
-        const user_ssn=await pool.query("SELECT ssn from users where username=$1",[username])
+        const{username}=req.body;        
+        const user_ssn=await pool.query("SELECT ssn from userssn_to_username where username=$1",[username])
         ssn=user_ssn.rows[0].ssn;
         const listDebts= await pool.query("Select name_debt,price_debt FROM debts WHERE user_ssn=$1",[ssn]);
         res.json(listDebts.rows);
@@ -288,6 +288,21 @@ app.delete("/debts",async(req,res)=>{
         console.error(e.message);
     }
 })
+
+//total debt 
+app.get("/totaldebt",async (req,res)=>{
+    try{
+        const{username}=req.header.authorization;
+        const user_ssn=await pool.query("SELECT ssn from userssn_to_username where username=$1",[username])
+        ssn=user_ssn.rows[0].ssn;
+        const listDebt= await pool.query("Select tot_debt FROM totaldebt WHERE user_ssn=$1",[ssn]);
+        res.json(listDebt.rows);
+    }
+    catch(err){
+        console.error(err.message);
+    }
+})
+
 
 //create Email or updating it
 
@@ -349,31 +364,18 @@ app.delete("/emails",async(req,res)=>{
     }
 })
 
-//creating plan and updating it
-
+// post plans
 app.post("/plans",async (req,res)=>{
     try{
         const{username}=req.body;
-        const user_ssn=await pool.query("SELECT ssn from users where username=$1",[username])
+        const user_ssn=await pool.query("SELECT ssn from userssn_to_username where username=$1",[username])
         ssn=user_ssn.rows[0].ssn;
-        const{check}=req.body;
         const{plan_id}=req.body;
         const{ret_age}=req.body;
         const{no_of_kids}=req.body;
         const{emergency_savings}=req.body;
-        if (check=="true"){
-            const newPlan = await pool.query("INSERT INTO plans VALUES($1,$2,$3,$4,$5) RETURNING *",[ssn,plan_id,ret_age,no_of_kids,emergency_savings]);
-            res.json(newPlan.rows);
-        }
-        else{
-            const newPlan = await pool.query("UPDATE plans SET ret_age=$1,no_of_kids=$2,emergency_savings=$3 where user_ssn=$4 and plan_id=$5 RETURNING *",[ret_age,no_of_kids,emergency_savings,ssn,plan_id]);
-            if (newPlan.rowCount>0){
-                res.json(newPlan.rows);
-            }
-            else{
-                res.json("Error, Such an entry doesnt exist");
-            }
-        }
+        const newPlan = await pool.query("INSERT INTO plans VALUES($1,$2,$3,$4,$5) RETURNING *",[ssn,plan_id,ret_age,no_of_kids,emergency_savings]);
+        res.json(newPlan.rows);
     }
     catch(e){
         console.error(e.message);
@@ -385,10 +387,10 @@ app.post("/plans",async (req,res)=>{
 
 app.get("/plans",async (req,res)=>{
     try{
-        const{username}=req.body;
-        const user_ssn=await pool.query("SELECT ssn from users where username=$1",[username])
+        const username=req.headers.authorization;
+        const user_ssn=await pool.query("SELECT ssn from userssn_to_username where username=$1",[username])
         ssn=user_ssn.rows[0].ssn;
-        const listPlans= await pool.query("Select plan_id,ret_age,no_of_kids,emergency_savings FROM plans WHERE user_ssn=$1",[ssn]);
+        const listPlans= await pool.query("Select ret_age,no_of_kids,emergency FROM plans WHERE user_ssn=$1",[ssn]);
         res.json(listPlans.rows);
     }
     catch(err){
@@ -411,6 +413,7 @@ app.delete("/plans",async(req,res)=>{
         console.error(e.message);
     }
 })
+
 
 app.listen(5000,()=>{
     console.log('Server has started on port 5000');

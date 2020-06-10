@@ -13,6 +13,7 @@ class Details extends React.Component{
             assets: false,
             debts: false,
             email: false,
+            plan: false,
             assetsnew: true,
             emailnew: true,
             debtsnew: true,
@@ -21,7 +22,11 @@ class Details extends React.Component{
             debtname: '',
             debtvalue: '',
             newEmail: '',
-            oldEmail: ''
+            oldEmail: '',
+            emergency: '',
+            no_of_kids: '',
+            ret_age: '',
+            plan_id: ''
         }
     }
     handleAssetsChange = () => {
@@ -37,6 +42,11 @@ class Details extends React.Component{
     handleEmailChange = () => {
         this.setState((prevState) => ({
             email : !prevState.email
+        }))
+    }
+    handlePlanChange = () => {
+        this.setState((prevState) => ({
+            plan : !prevState.plan
         }))
     }
     handleAssetsDropdown = (main,arr) => {
@@ -137,7 +147,26 @@ class Details extends React.Component{
                     })
 
             }
-        }         
+        } 
+        if(this.state.plan === true){
+            if(this.state.plan_id == '' || this.state.no_of_kids == '' || this.state.emergency == '' || this.state.ret_age == ''){
+                alert("Please Enter Plan details")
+            }
+            else{
+                fetch('http://localhost:5000/plans', {
+                        method: 'post',
+                        headers: {"Content-Type": "application/json"},
+                        body: JSON.stringify({
+                            username: this.props.username[0].username,
+                            plan_id: this.state.plan_id,
+                            ret_age: this.state.ret_age,
+                            emergency_savings: this.state.emergency,
+                            no_of_kids: this.state.no_of_kids
+                        })
+                    })
+
+            }
+        }        
        
     }
 
@@ -292,6 +321,41 @@ class Details extends React.Component{
                     </ListItem>
                     <ListItem className = "Details_Page_List_Item">
                     <TextField className = "space" id="standard-basic" label= "Old Email" name = "oldEmail" value = {this.state.oldEmail} onChange = {this.handleChange}/>
+                    </ListItem>
+                    </List>
+                    </Collapse>
+                    </div>
+                </div>
+                <div className = "Details_Page_Radio_Buttons_Column">
+                    <div className = "Details_Page_Radio_Buttons_Column_Heading">
+                    <div className = "Details_Page_SubHeading">
+                        Plans
+                    </div>
+                    <div className = "Details_Page_Radio_Button">
+                    <Radio
+                        checked={this.state.plan}
+                        onClick={this.handlePlanChange}
+                        value="a"
+                        name="radio-button-demo"
+                        inputProps={{ 'aria-label': 'A' }}
+                        size = "small"
+                    />
+                    </div>
+                    </div>
+                    <div className = "Details_Page_Input_Fields">
+                    <Collapse in={this.state.plan} timeout="auto" unmountOnExit className = "Details_Page_Collapse">
+                     <List component="div" disablePadding className = "Details_Page_List">
+                    <ListItem className = "Details_Page_List_Item">
+                    <TextField className = "space" id="standard-basic" label="Emergency Fund" name = "emergency" value = {this.state.emergency} onChange = {this.handleChange}/>
+                    </ListItem>
+                    <ListItem className = "Details_Page_List_Item">
+                    <TextField className = "space" id="standard-basic" label= "Retirement Age" name = "ret_age" value = {this.state.ret_age} onChange = {this.handleChange}/>
+                    </ListItem>
+                    <ListItem className = "Details_Page_List_Item">
+                    <TextField className = "space" id="standard-basic" label= "Number of Kids" name = "no_of_kids" value = {this.state.no_of_kids} onChange = {this.handleChange}/>
+                    </ListItem>
+                    <ListItem className = "Details_Page_List_Item">
+                    <TextField className = "space" id="standard-basic" label= "Plan ID" name = "plan_id" value = {this.state.plan_id} onChange = {this.handleChange}/>
                     </ListItem>
                     </List>
                     </Collapse>
