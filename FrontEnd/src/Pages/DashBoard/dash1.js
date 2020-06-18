@@ -206,7 +206,18 @@ export default class App extends React.Component {
     }
     currentPortfolio.datasets[0].data = arr
     })
-    
+
+    fetch("http://localhost:5000/totaldebt",{
+      method: 'get',
+      headers: {
+        Authorization: this.props.username[0].username
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log(data)
+    })
+
     sumCur = 0;
     sumRec = 0;
     NWcur = [];

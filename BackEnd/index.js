@@ -47,19 +47,20 @@ app.post('/login', (req,res) => {
 //sign up
 
 app.post('/signup', (req,res)=> {
-    let {fname,lname,email,password,username,salary,expenses,age} = req.body;
+    let {fname,lname,ssn,password,username,salary,expenses,age} = req.body;
     bcrypt.hash(password, 0, function(err, hash) {
         console.log(hash)
         db('users')
         .returning('*')
         .insert({
-            fname: fname,
-            lname: lname,
+            f_name: fname,
+            m_init: '',
+            l_name: lname,
             username: username,
             password: hash,
-            emailid: email,
-            age: age,
-            salary: salary,
+            ssn: ssn,
+            curr_age: age,
+            income: salary,
             expenses: expenses
         })
         .then(response => {
